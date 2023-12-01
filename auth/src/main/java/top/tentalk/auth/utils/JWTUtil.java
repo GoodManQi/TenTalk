@@ -114,7 +114,7 @@ public class JWTUtil {
             jwt = verifier.verify(token);
         } catch (Exception e) {
             log.warn(e.getMessage());
-            throw (BizException) new BizException(ErrorCode.AUTH_FAILURE_TOKEN_FAILURE).initCause(e);
+            throw (BizException) new BizException(ErrorCode.INTERNAL_ERROR).initCause(e);
         }
         return jwt;
     }

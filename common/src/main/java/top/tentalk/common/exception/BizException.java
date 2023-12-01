@@ -1,6 +1,7 @@
 package top.tentalk.common.exception;
 
 
+import lombok.Getter;
 import org.apache.commons.lang3.ArrayUtils;
 import top.tentalk.common.constants.ErrorCode;
 
@@ -14,6 +15,7 @@ public class BizException extends RuntimeException {
 
     private String message;
 
+    @Getter
     private String code;
 
     public BizException() {
