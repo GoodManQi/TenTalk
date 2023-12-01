@@ -1,0 +1,53 @@
+server:
+  port: 8150
+  servlet:
+    context-path: /commonApi
+spring:
+  application:
+    name: common-api
+  messages:
+    basename: message
+    encoding: UTF-8
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 5000
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ten-talk?characterEncoding=utf8&useSSL=false&useUnicode=true&serverTimezone=GMT%2B8
+    username: root
+    password: 12345678
+    # druid-spring-boot-starter 依赖自动生效 druid，可以不配置 type 属性，但建议配置
+    type: com.alibaba.druid.pool.DruidDataSource
+    # Druid连接池配置
+    druid:
+      # 初始化连接池大小，最小连接数，最大连接数
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 获取连接时最大等待时间，单位毫秒
+      max-wait: 60000
+      # 验证连接有效性的查询SQL
+      validation-query: select 1
+      # 从连接池获取连接时，是否验证连接的有效性，true: 验证；false: 不验证
+      test-on-borrow: false
+      # 从连接池获取连接时，如果连接空闲时间超过time-between-eviction-runs-millis是否检测连接的有效性
+      # true: 验证；false: 不验证
+      test-while-idle: true
+      # Unit: ms，该配置有两个作用：
+      # 1) Destroy线程会检测连接的间隔时间
+      # 2) testWhileIdle的判断依据（详见 testWhileIdele 属性的说明）
+      time-between-eviction-runs-millis: 60000
+
+#1分钟内接口请求超过此次数后进行限制
+#跨域来源 dev配置dev  test配置test
+ssv:
+  interfaceNum: 30
+  origin: https://bsa-dev.ideastream.tech
+  #用户登录令牌
+  userLoginAppId: "xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+jwt:
+  expireTime: 12 # token过期时间 小时
+  endTime: 72 # 用户登陆最大持续时间 小时
+  intervalTime: 360 # 间隔过期需要续期时间 分钟
